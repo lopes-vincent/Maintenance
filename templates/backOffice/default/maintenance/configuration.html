@@ -1,0 +1,118 @@
+{extends file="admin-layout.tpl"}
+
+{block name="after-bootstrap-css"}
+
+{/block}
+
+{block name="no-return-functions"}
+{$admin_current_location = 'module'}
+{/block}
+
+{block name="page-title"}
+
+{/block}
+
+{block name="check-resource"}admin.module{/block}
+{block name="check-access"}view{/block}
+{block name="check-module"}Maintenance{/block}
+
+{block name="main-content"}
+    <style>
+        #maintenance_page  {
+            text-align: center;
+            padding: 150px;
+            font: 20px Helvetica, sans-serif;
+            color: {$fontColor};
+            background-color: {$backgroundColor};
+        }
+        #maintenance_page article { display: block; text-align: left; width: 650px; margin: 0 auto; }
+        #maintenance_page h1 { font-size: 50px; }
+        #maintenance_page a {  color: {$linkColor}; text-decoration: none; }
+        #maintenance_page a:hover { color: {$fontColor}; text-decoration: none; }
+    </style>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                <div class="row">
+                    <div class="col-md-4">
+                        {intl l='Maintenance module configuration' d='maintenance.bo.default'}
+                    </div>
+                    {form name="toggle_maintenance_form"}
+                        <form action="{url path="/maintenance/toggle"}" method="post" class="col-md-6">
+                            {form_hidden_fields form=$form}
+                            {form_field form=$form field='success_url'}
+                                <input type="hidden" name="{$name}" value="{url path={navigate to="current"}}"/>
+                            {/form_field}
+                            {if $isInMaintenance}<input type="submit" class="btn btn-danger" value="{intl l="Disable maintenance"}">
+                            {else}<input type="submit" class="btn btn-success" value="{intl l="Enable maintenance"}">{/if}
+                        </form>
+                    {/form}
+                </div>
+            </h1>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-4">
+    {form name="maintenance_configuration_form"}
+        <form action="{url path="/admin/module/Maintenance/configuration"}" method="post">
+
+            {form_hidden_fields form=$form}
+
+            {if $form_error}
+                <div class="alert alert-danger">{$form_error_message}</div>
+            {/if}
+
+            {form_field form=$form field='success_url'}
+                <input type="hidden" name="{$name}" value="{url path={navigate to="current"}}"/>
+            {/form_field}
+
+            {form_field form=$form field='title'}
+            <div class="form-group">
+                <label for="title">{intl l="Title"}</label>
+                <input id="title" class="form-control" name="{$name}" type="text" value="{$title}">
+            </div>
+            {/form_field}
+            {form_field form=$form field='message'}
+            <div class="form-group">
+                <label for="message">{intl l="Message"}</label>
+                <textarea id="message" class="form-control" name="{$name}" rows="3">{$message nofilter}</textarea>
+            </div>
+            {/form_field}
+            {form_field form=$form field='background_color'}
+            <div class="form-group">
+                <label for="backgroundColor">{intl l="Background color"}</label>
+                <input id="backgroundColor" class="form-control" name="{$name}" type="color" value="{$backgroundColor}">
+            </div>
+            {/form_field}
+            {form_field form=$form field='font_color'}
+            <div class="form-group">
+                <label for="fontColor">{intl l="Font color"}</label>
+                <input id="fontColor" class="form-control" name="{$name}" type="color" value="{$fontColor}">
+            </div>
+            {/form_field}
+            {form_field form=$form field='link_color'}
+            <div class="form-group">
+                <label for="linkColor">{intl l="Link color"}</label>
+                <input id="linkColor" class="form-control" name="{$name}" type="color" value="{$linkColor}">
+            </div>
+            {/form_field}
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-success" value="{intl l="Save for preview"}">
+            </div>
+        </form>
+    {/form}
+</div>
+<div class="col-md-8" id="maintenance_page">
+    <article>
+        <h1>{$title}</h1>
+        <div>
+            <p>
+                {$message nofilter}
+            </p>
+        </div>
+    </article>
+</div>
+{/block}

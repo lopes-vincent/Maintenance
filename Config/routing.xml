@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <!--
+
+    if a /admin/module/maintenance/ route is provided, a "Configuration" button will be displayed
+    for the module in the module list. Clicking this button will invoke this route.
+
+    <route id="my_route_id" path="/admin/module/maintenance">
+        <default key="_controller">Maintenance\Full\Class\Name\Of\YourConfigurationController::methodName</default>
+    </route>
+
+    <route id="my_route_id" path="/admin/module/maintenance/route-name">
+        <default key="_controller">Maintenance\Full\Class\Name\Of\YourAdminController::methodName</default>
+    </route>
+
+    <route id="my_route_id" path="/my/route/name">
+        <default key="_controller">Maintenance\Full\Class\Name\Of\YourOtherController::methodName</default>
+    </route>
+
+    ...add as many routes as required.
+
+    <route>
+    ...
+    </route>
+    -->
+
+    <route id="maintenance.config" path="/admin/module/Maintenance">
+        <default key="_controller">Maintenance:Configuration:view</default>
+    </route>
+
+    <route id="maintenance.config.save" path="/admin/module/Maintenance/configuration" methods="post">
+        <default key="_controller">Maintenance:Configuration:configuration</default>
+    </route>
+
+    <route id="maintenance.toggle_maintenance" path="/maintenance/toggle" methods="post">
+        <default key="_controller">Maintenance:Configuration:toggleMaintenance</default>
+    </route>
+
+</routes>
