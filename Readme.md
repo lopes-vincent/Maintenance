@@ -22,4 +22,6 @@ composer require vlopes/maintenance-module:~1.0
 ## Usage
 
 To enable maintenance or edit maintenance page go here : 
-```/admin/module/Maintenance```
+```
+/admin/module/Maintenance
+```
