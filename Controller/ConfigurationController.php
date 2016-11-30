@@ -29,6 +29,7 @@ class ConfigurationController extends BaseAdminController
         $finder->files()->in(THELIA_WEB_DIR)->name('index.php');
 
         $indexContent = "";
+        $indexFile = "";
 
         /** @var SplFileInfo $file */
         foreach ($finder as $file) {
@@ -40,6 +41,9 @@ class ConfigurationController extends BaseAdminController
             $isInMaintenance = 1;
         }
 
+        $isIndexWritable = is_writable(THELIA_WEB_DIR."index.php");
+        $isWebWritable = is_writable(THELIA_WEB_DIR);
+
         return $this->render(
             'maintenance/configuration',
             [
@@ -48,7 +52,9 @@ class ConfigurationController extends BaseAdminController
                 'backgroundColor' => html_entity_decode($backgroundColor[1]),
                 'fontColor' => html_entity_decode($fontColor[1]),
                 'linkColor' => html_entity_decode($linkColor[1]),
-                'isInMaintenance' => $isInMaintenance
+                'isInMaintenance' => $isInMaintenance,
+                'isIndexWritable' => $isIndexWritable,
+                'isWebWritable' => $isWebWritable,
             ]
         );
     }

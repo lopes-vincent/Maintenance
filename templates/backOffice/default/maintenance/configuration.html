@@ -33,6 +33,16 @@
 
     <div class="row">
         <div class="col-lg-12">
+            {if $isIndexWritable !== true}
+                <div class="alert alert-danger">
+                    {intl l="The file web/index.php is not writable please change the permissions or the module will not work"}
+                </div>
+            {/if}
+            {if $isWebWritable !== true}
+                <div class="alert alert-danger">
+                    {intl l="The directory web is not writable please change the permissions or the module will not work"}
+                </div>
+            {/if}
             <h1 class="page-header">
                 <div class="row">
                     <div class="col-md-4">
