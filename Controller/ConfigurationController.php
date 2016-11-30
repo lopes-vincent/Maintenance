@@ -40,6 +40,9 @@ class ConfigurationController extends BaseAdminController
             $isInMaintenance = 1;
         }
 
+        $isIndexWritable = is_writable(THELIA_WEB_DIR."index.php");
+        $isWebWritable = is_writable(THELIA_WEB_DIR);
+
         return $this->render(
             'maintenance/configuration',
             [
@@ -48,7 +51,9 @@ class ConfigurationController extends BaseAdminController
                 'backgroundColor' => html_entity_decode($backgroundColor[1]),
                 'fontColor' => html_entity_decode($fontColor[1]),
                 'linkColor' => html_entity_decode($linkColor[1]),
-                'isInMaintenance' => $isInMaintenance
+                'isInMaintenance' => $isInMaintenance,
+                'isIndexWritable' => $isIndexWritable,
+                'isWebWritable' => $isWebWritable,
             ]
         );
     }
@@ -115,7 +120,7 @@ class ConfigurationController extends BaseAdminController
             if (preg_match("/\/\/⚠((.|\n)*)⚠/", $contents)) {
                 $newContent = preg_replace("/\/\/⚠((.|\n)*)⚠/", "", $contents);
             } else {
-                $maintenanceTag = "**/\n\n//⚠--MAINTENANCE\nhttp_response_code(503);\ninclude('../local/modules/Maintenance/templates/maintenance.html');\ndie();\n//__⚠\n";
+                $maintenanceTag = "**/\n\n//⚠--MAINTENANCE\nhttp_response_code(503);\ninclude('maintenance.html');\ndie();\n//__⚠\n";
                 $newContent = preg_replace("/\*\*\/\n\n/i", $maintenanceTag, $contents);
             }
 
