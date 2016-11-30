@@ -29,7 +29,6 @@ class ConfigurationController extends BaseAdminController
         $finder->files()->in(THELIA_WEB_DIR)->name('index.php');
 
         $indexContent = "";
-        $indexFile = "";
 
         /** @var SplFileInfo $file */
         foreach ($finder as $file) {
@@ -121,7 +120,7 @@ class ConfigurationController extends BaseAdminController
             if (preg_match("/\/\/⚠((.|\n)*)⚠/", $contents)) {
                 $newContent = preg_replace("/\/\/⚠((.|\n)*)⚠/", "", $contents);
             } else {
-                $maintenanceTag = "**/\n\n//⚠--MAINTENANCE\nhttp_response_code(503);\ninclude('../local/modules/Maintenance/templates/maintenance.html');\ndie();\n//__⚠\n";
+                $maintenanceTag = "**/\n\n//⚠--MAINTENANCE\nhttp_response_code(503);\ninclude('maintenance.html');\ndie();\n//__⚠\n";
                 $newContent = preg_replace("/\*\*\/\n\n/i", $maintenanceTag, $contents);
             }
 
