@@ -26,7 +26,7 @@ class ConfigurationController extends BaseAdminController
 
 
         $finder = new Finder();
-        $finder->files()->in(THELIA_WEB_DIR)->name('index.php');
+        $finder->files()->depth('== 0')->in(THELIA_WEB_DIR)->name('index.php');
 
         $indexContent = "";
 
@@ -108,7 +108,7 @@ class ConfigurationController extends BaseAdminController
             $data = $this->validateForm($form)->getData();
 
             $finder = new Finder();
-            $finder->files()->in(THELIA_WEB_DIR)->name('index.php');
+            $finder->files()->depth('== 0')->in(THELIA_WEB_DIR)->name('index.php');
 
             $contents = "";
 
