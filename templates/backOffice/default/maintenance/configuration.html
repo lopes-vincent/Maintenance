@@ -49,7 +49,7 @@
                         {intl l='Maintenance module configuration' d='maintenance.bo.default'}
                     </div>
                     {form name="toggle_maintenance_form"}
-                        <form action="{url path="/maintenance/toggle"}" method="post" class="col-md-6">
+                        <form action="{url path="/admin/module/Maintenance/toggle"}" method="post" class="col-md-6">
                             {form_hidden_fields form=$form}
                             {form_field form=$form field='success_url'}
                                 <input type="hidden" name="{$name}" value="{url path={navigate to="current"}}"/>
