@@ -36,7 +36,7 @@
         <default key="_controller">Maintenance:Configuration:configuration</default>
     </route>
 
-    <route id="maintenance.toggle_maintenance" path="/maintenance/toggle" methods="post">
+    <route id="maintenance.toggle_maintenance" path="/admin/module/Maintenance/toggle" methods="post">
         <default key="_controller">Maintenance:Configuration:toggleMaintenance</default>
     </route>
 
