@@ -2,6 +2,7 @@
 
 namespace Maintenance\Form;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Thelia\Form\BaseForm;
 
 class ConfigurationForm extends BaseForm
@@ -11,26 +12,26 @@ class ConfigurationForm extends BaseForm
         $this->formBuilder
             ->add(
                 "title",
-                "text"
+                TextType::class
             )
             ->add(
                 "message",
-                "text"
+                TextType::class
             )
             ->add(
                 "background_color",
-                "text"
+                TextType::class
             )
             ->add(
                 "font_color",
-                "text"
+                TextType::class
             )
             ->add(
                 "link_color",
-                "text"
+                TextType::class
             );
     }
-    public function getName()
+    public static function getName()
     {
         return "maintenance_configuration_form";
     }

@@ -11,7 +11,7 @@ class ToggleMaintenanceForm extends BaseForm
 
     }
 
-    public function getName()
+    public static function getName()
     {
         return "toggle_maintenance_form";
     }

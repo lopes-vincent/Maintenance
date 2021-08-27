@@ -13,6 +13,7 @@
 namespace Maintenance;
 
 use Propel\Runtime\Connection\ConnectionInterface;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Thelia\Module\BaseModule;
@@ -31,7 +32,7 @@ class Maintenance extends BaseModule
      * Have fun !
      */
 
-    public function postActivation(ConnectionInterface $con = null)
+    public function postActivation(ConnectionInterface $con = null): void
     {
         if (!file_exists(self::MAINTENANCE_FILE)) {
             copy(THELIA_MODULE_DIR . 'Maintenance' . DS . 'templates'. DS .'maintenance.html', self::MAINTENANCE_FILE);
@@ -55,5 +56,13 @@ class Maintenance extends BaseModule
         foreach ($finder as $file) {
             return $file;
         }
+    }
+
+    public static function configureServices(ServicesConfigurator $servicesConfigurator): void
+    {
+        $servicesConfigurator->load(self::getModuleCode().'\\', __DIR__)
+            ->exclude([THELIA_MODULE_DIR . ucfirst(self::getModuleCode()). "/I18n/*"])
+            ->autowire(true)
+            ->autoconfigure(true);
     }
 }
