@@ -1,66 +1,46 @@
-{extends file="admin-layout.tpl"}
+<style>
+    #maintenance_page  {
+        text-align: center;
+        padding: 150px;
+        font: 20px Helvetica, sans-serif;
+        color: {$fontColor};
+        background-color: {$backgroundColor};
+    }
+    #maintenance_page article { display: block; text-align: left; width: 650px; margin: 0 auto; }
+    #maintenance_page h1 { font-size: 50px; }
+    #maintenance_page a {  color: {$linkColor}; text-decoration: none; }
+    #maintenance_page a:hover { color: {$fontColor}; text-decoration: none; }
+</style>
 
-{block name="after-bootstrap-css"}
-
-{/block}
-
-{block name="no-return-functions"}
-{$admin_current_location = 'module'}
-{/block}
-
-{block name="page-title"}
-
-{/block}
-
-{block name="check-resource"}admin.module{/block}
-{block name="check-access"}view{/block}
-{block name="check-module"}Maintenance{/block}
-
-{block name="main-content"}
-    <style>
-        #maintenance_page  {
-            text-align: center;
-            padding: 150px;
-            font: 20px Helvetica, sans-serif;
-            color: {$fontColor};
-            background-color: {$backgroundColor};
-        }
-        #maintenance_page article { display: block; text-align: left; width: 650px; margin: 0 auto; }
-        #maintenance_page h1 { font-size: 50px; }
-        #maintenance_page a {  color: {$linkColor}; text-decoration: none; }
-        #maintenance_page a:hover { color: {$fontColor}; text-decoration: none; }
-    </style>
-
-    <div class="row">
-        <div class="col-lg-12">
-            {if $isIndexWritable !== true}
-                <div class="alert alert-danger">
-                    {intl l="The file web/index.php is not writable please change the permissions or the module will not work"}
+<div class="row">
+    <div class="col-lg-12">
+        {if $isIndexWritable !== true}
+            <div class="alert alert-danger">
+                {intl l="The file web/index.php is not writable please change the permissions or the module will not work"}
+            </div>
+        {/if}
+        {if $isWebWritable !== true}
+            <div class="alert alert-danger">
+                {intl l="The directory web is not writable please change the permissions or the module will not work"}
+            </div>
+        {/if}
+        <h1 class="page-header">
+            <div class="row">
+                <div class="col-md-4">
+                    {intl l='Maintenance module configuration' d='maintenance.bo.default'}
                 </div>
-            {/if}
-            {if $isWebWritable !== true}
-                <div class="alert alert-danger">
-                    {intl l="The directory web is not writable please change the permissions or the module will not work"}
-                </div>
-            {/if}
-            <h1 class="page-header">
-                <div class="row">
-                    <div class="col-md-4">
-                        {intl l='Maintenance module configuration' d='maintenance.bo.default'}
-                    </div>
-                    {form name="toggle_maintenance_form"}
-                        <form action="{url path="/admin/module/Maintenance/toggle"}" method="post" class="col-md-6">
-                            {form_hidden_fields form=$form}
-                            {form_field form=$form field='success_url'}
-                                <input type="hidden" name="{$name}" value="{url path={navigate to="current"}}"/>
-                            {/form_field}
-                            {if $isInMaintenance}<input type="submit" class="btn btn-danger" value="{intl l="Disable maintenance"}">
-                            {else}<input type="submit" class="btn btn-success" value="{intl l="Enable maintenance"}">{/if}
-                        </form>
-                    {/form}
-                </div>
-            </h1>
-        </div>
+                {form name="toggle_maintenance_form"}
+                    <form action="{url path="/admin/module/Maintenance/toggle"}" method="post" class="col-md-6">
+                        {form_hidden_fields form=$form}
+                        {form_field form=$form field='success_url'}
+                            <input type="hidden" name="{$name}" value="{url path={navigate to="current"}}"/>
+                        {/form_field}
+                        {if $isInMaintenance}<input type="submit" class="btn btn-danger" value="{intl l="Disable maintenance"}">
+                        {else}<input type="submit" class="btn btn-success" value="{intl l="Enable maintenance"}">{/if}
+                    </form>
+                {/form}
+            </div>
+        </h1>
     </div>
 </div>
 
@@ -125,4 +105,4 @@
         </div>
     </article>
 </div>
-{/block}
+

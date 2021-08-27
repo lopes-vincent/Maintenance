@@ -28,7 +28,7 @@
     </route>
     -->
 
-    <route id="maintenance.config" path="/admin/module/Maintenance">
+    <!--<route id="maintenance.config" path="/admin/module/Maintenance">
         <default key="_controller">Maintenance:Configuration:view</default>
     </route>
 
@@ -38,6 +38,6 @@
 
     <route id="maintenance.toggle_maintenance" path="/admin/module/Maintenance/toggle" methods="post">
         <default key="_controller">Maintenance:Configuration:toggleMaintenance</default>
-    </route>
+    </route>-->
 
 </routes>
